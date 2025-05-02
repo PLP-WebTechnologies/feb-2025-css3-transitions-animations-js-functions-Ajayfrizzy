@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage with Animations</title>
+    <style>
+        /* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+button:nth-child(even){
+    background-color: rgb(255, 68, 0);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #6b1700;
+    transform: scale(1.05);
+}
+
+button:nth-child(odd){
+    background-color: #3498db;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover:nth-child(odd) {
+    background-color: #012034;
+    transform: scale(1.05);
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+/* Hover Effect (Transition) */
+.box:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+}
+
+/* CSS Keyframe Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spin-animation {
+    animation: spin 2s linear infinite;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive Webpage</h1>
+    </header>
+    <main>
+        <div class="box" id="animated-box">Hover or Click Me!</div>
+        <button id="animate-btn">Trigger Animation</button>
+        <button id="save-btn">Save to localStorage</button>
+        <button id="load-btn">Load from localStorage</button>
+    </main>
+    <script>
+        // DOM Elements
+const animatedBox = document.getElementById("animated-box");
+const animateBtn = document.getElementById("animate-btn");
+const saveBtn = document.getElementById("save-btn");
+const loadBtn = document.getElementById("load-btn");
+
+// Trigger CSS Animation on Button Click
+animateBtn.addEventListener("click", () => {
+    animatedBox.classList.toggle("spin-animation");
+});
+
+// Store Data in localStorage
+saveBtn.addEventListener("click", () => {
+    localStorage.setItem("lastAnimationTime", new Date().toLocaleTimeString());
+    alert("Data saved to localStorage!");
+});
+
+// Load Data from localStorage
+loadBtn.addEventListener("click", () => {
+    const savedTime = localStorage.getItem("lastAnimationTime");
+    if (savedTime) {
+        alert(`Last animation was triggered at: ${savedTime}`);
+    } else {
+        alert("No saved data found.");
+    }
+});
+    </script>
+</body>
+</html>
